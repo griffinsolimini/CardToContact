@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		C44FEADB1F3A9E5700FFE225 /* APIHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = C44FEADA1F3A9E5700FFE225 /* APIHandler.swift */; };
+		C4AAB6861F3BCE920023513F /* View.xib in Resources */ = {isa = PBXBuildFile; fileRef = C4AAB6851F3BCE920023513F /* View.xib */; };
 		C4F3A0761F3B77890058E708 /* ContactHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4F3A0751F3B77890058E708 /* ContactHandler.swift */; };
 		C4F8F9F31F3A999200921E66 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4F8F9F21F3A999200921E66 /* AppDelegate.swift */; };
 		C4F8F9FA1F3A999200921E66 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C4F8F9F91F3A999200921E66 /* Assets.xcassets */; };
@@ -17,6 +18,7 @@
 
 /* Begin PBXFileReference section */
 		C44FEADA1F3A9E5700FFE225 /* APIHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIHandler.swift; sourceTree = "<group>"; };
+		C4AAB6851F3BCE920023513F /* View.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = View.xib; sourceTree = "<group>"; };
 		C4F3A0751F3B77890058E708 /* ContactHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactHandler.swift; sourceTree = "<group>"; };
 		C4F8F9EF1F3A999200921E66 /* CardToContact.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CardToContact.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C4F8F9F21F3A999200921E66 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -58,6 +60,7 @@
 			children = (
 				C4F8F9F21F3A999200921E66 /* AppDelegate.swift */,
 				C4F8FA041F3A99FC00921E66 /* ViewController.swift */,
+				C4AAB6851F3BCE920023513F /* View.xib */,
 				C44FEADA1F3A9E5700FFE225 /* APIHandler.swift */,
 				C4F3A0751F3B77890058E708 /* ContactHandler.swift */,
 				C4F8F9F91F3A999200921E66 /* Assets.xcassets */,
@@ -128,6 +131,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C4F8F9FD1F3A999200921E66 /* LaunchScreen.storyboard in Resources */,
+				C4AAB6861F3BCE920023513F /* View.xib in Resources */,
 				C4F8F9FA1F3A999200921E66 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

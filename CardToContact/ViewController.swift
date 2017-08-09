@@ -13,6 +13,9 @@ class ViewController: UIViewController, AVCapturePhotoCaptureDelegate {
 
     var cameraOutput = AVCapturePhotoOutput()
     
+    @IBOutlet weak var containerView: UIView!
+    @IBOutlet weak var cameraButton: UIButton!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -23,9 +26,6 @@ class ViewController: UIViewController, AVCapturePhotoCaptureDelegate {
             
             session.startRunning()
         }
-        
-        let singleFingerTap = UITapGestureRecognizer(target: self, action: #selector(takePhoto))
-        view.addGestureRecognizer(singleFingerTap)
     }
     
     func setupSession() -> AVCaptureSession? {
@@ -47,8 +47,8 @@ class ViewController: UIViewController, AVCapturePhotoCaptureDelegate {
         }
         
         if let previewLayer = AVCaptureVideoPreviewLayer(session: session) {
-            view.layer.addSublayer(previewLayer)
-            previewLayer.frame = self.view.layer.frame
+            containerView.layer.addSublayer(previewLayer)
+            previewLayer.frame = containerView.layer.frame
         } else {
             return nil
             
@@ -63,6 +63,10 @@ class ViewController: UIViewController, AVCapturePhotoCaptureDelegate {
         }
         
         return session
+    }
+    
+    @IBAction func cameraButtonPressed(_ sender: Any) {
+        takePhoto()
     }
     
     func takePhoto() {
