@@ -7,13 +7,23 @@
 //
 
 import Foundation
+import Contacts
+import UIKit
+import ContactsUI
 
 class ContactHandler {
     
-    func makeContact(rawText: String) {
+    func makeContact(rawText: String) -> CNMutableContact {
         // TODO Jansen
         
         print(rawText)
+        
+        let contact = CNMutableContact()
+        let homePhone = CNLabeledValue(label: CNLabelHome, value: CNPhoneNumber(stringValue :"1234567890" ))
+        contact.phoneNumbers = [homePhone]
+        
+        return contact
+        
     }
     
 }

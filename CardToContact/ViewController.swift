@@ -8,8 +8,9 @@
 
 import UIKit
 import AVFoundation
+import ContactsUI
 
-class ViewController: UIViewController, AVCapturePhotoCaptureDelegate {
+class ViewController: UIViewController, AVCapturePhotoCaptureDelegate, CNContactViewControllerDelegate {
 
     var cameraOutput = AVCapturePhotoOutput()
     
@@ -26,6 +27,8 @@ class ViewController: UIViewController, AVCapturePhotoCaptureDelegate {
             
             session.startRunning()
         }
+        
+        navigationController!.setNavigationBarHidden(true, animated: false)
     }
     
     func setupSession() -> AVCaptureSession? {
@@ -115,7 +118,8 @@ class ViewController: UIViewController, AVCapturePhotoCaptureDelegate {
                                 if let response = response as? NSDictionary {
                                     if let fta = response["fullTextAnnotation"] as? NSDictionary, let text = fta["text"] as? String {
                                         
-                                        ContactHandler().makeContact(rawText: text)
+                                        let newContact = ContactHandler().makeContact(rawText: text)
+                                        self.addContact(contact: newContact)
                                     }
                                 }
                             }
@@ -127,5 +131,16 @@ class ViewController: UIViewController, AVCapturePhotoCaptureDelegate {
                 }
             }
         })
+    }
+    
+    func addContact(contact : CNMutableContact) {
+        if #available(iOS 9.0, *) {
+            let store = CNContactStore()
+            let controller = CNContactViewController(forUnknownContact : contact)// .viewControllerForUnknownContact(contact)
+            controller.contactStore = store
+            controller.delegate = self
+            self.navigationController?.setNavigationBarHidden(false, animated: true)
+            self.navigationController!.pushViewController(controller, animated: true)
+        }
     }
 }
