@@ -7,63 +7,73 @@
 //
 
 import Foundation
+import Contacts
+import UIKit
+import ContactsUI
 
 class ContactHandler {
     // define contact struct
-    struct Contact {
-        var email, phoneNumber, faxNumber, firstName, lastName, company, notes, address1, address2: String
-        init() {
-            //initial values for variables
-            email = "hollaBackatCha@aim.com"
-            phoneNumber = "5138675309"
-            faxNumber = "people still have these?"
-            firstName = "Lavender"
-            lastName = "Gooms"
-            company = "bronson bros brewing"
-            address1 = "shelterly challenged"
-            address2 = "Cbus, OH 43210"
-            notes = ""
-        }
-    }
-    func makeContact(rawText: String) {
+    func makeContact(rawText: String) -> CNMutableContact {
         // TODO Jansen
-        var myContact = Contact()
-        print(rawText)
+        let contact = CNMutableContact()
+        contact.givenName = "First"
+        contact.familyName = "Last"
+        contact.organizationName = "Company"
+        contact.jobTitle = "Title"
+        let homeAddress = CNMutablePostalAddress()
+        homeAddress.street = "1 Infinite Loop"
+        homeAddress.city = "Cupertino"
+        homeAddress.state = "CA"
+        homeAddress.postalCode = "95014"
+        contact.postalAddresses = [CNLabeledValue(label:CNLabelHome, value:homeAddress)]
+
+        let homePhone = CNLabeledValue(label: CNLabelHome, value: CNPhoneNumber(stringValue :"2312312341"))
+        let workPhone = CNLabeledValue(label: CNLabelWork, value: CNPhoneNumber(stringValue: "2312312341"))
+        let cellPhone = CNLabeledValue(label: CNLabelPhoneNumberMobile, value: CNPhoneNumber(stringValue: "2312312341"))
+        let workFax = CNLabeledValue(label: CNLabelPhoneNumberWorkFax, value: CNPhoneNumber(stringValue: "2345612341"))
+        let workEmail = CNLabeledValue(label: CNLabelWork, value: NSString(string: "email@gmail.com"))
+        let homeEmail = CNLabeledValue(label: CNLabelHome, value: NSString(string: "email@gmail.com"))
+        let homeFax = CNLabeledValue(label: CNLabelPhoneNumberHomeFax, value: CNPhoneNumber(stringValue: "2345612341"))
+
+        contact.phoneNumbers = [homePhone, cellPhone, workPhone, homeFax, workFax]
+        contact.emailAddresses = [homeEmail, workEmail]
         //Create array of strings based on line
         let filteredText = rawText.components(separatedBy: "\n")
         print(filteredText)
         for line in filteredText {
-            //remove non-numeric characters
+        //remove non-numeric characters
             let result = String(line.characters.filter { "01234567890.".characters.contains($0) }).characters.count
             let eChar: Character = "@"
-            //check for standard phone length
+        //check for standard phone length
             if result == 10 {
-                //eliminate fax
+            //eliminate fax
                 let faxChar: Character = "f"
                 if line.lowercased().characters.contains(faxChar) {
-                    myContact.faxNumber = String(line.characters.filter { "01234567890.".characters.contains($0) })
+                    contact.phoneNumbers[3] = CNLabeledValue(label: CNLabelPhoneNumberHomeFax, value: CNPhoneNumber(stringValue: "2345612341"))
                 }
-                    //store phone number
+                //store phone number
                 else {
-                    myContact.phoneNumber = String(line.characters.filter { "01234567890.".characters.contains($0) })
+                    contact.phoneNumbers[1] = CNLabeledValue(label: CNLabelPhoneNumberMobile, value: CNPhoneNumber(stringValue: "2312312341"))
                 }
             }
             else if line.characters.contains(eChar)
-            {
-                myContact.email = line
-                
-            }
-                // Check if Address line has been changed and if numbers were found (zip code or house #)
-            else if myContact.address1 == "shelterly challenged" && result > 2 {
-                myContact.address1=line
-            }
-                //Check if numbers were found( Zip Code and House #)
+                {
+                contact.emailAddresses[1] = CNLabeledValue(label: CNLabelWork, value: NSString(string: "email@gmail.com"))
+            
+                }
+            // Check if Address line has been changed and if numbers were found (zip code or house #)
+            else if homeAddress.street == "1 infinite loop" && result > 2 {
+                homeAddress.street = line
+                }
+            //Check if numbers were found( Zip Code and House #)
             else if  result > 2 {
-                myContact.address2 = line
+                homeAddress.city = line
+                }
             }
+    //display contact info
+   
+        return contact
         }
-        //display contact info
-        print(myContact)
+    
     }
     
-}

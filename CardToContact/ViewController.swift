@@ -8,10 +8,16 @@
 
 import UIKit
 import AVFoundation
+import ContactsUI
 
-class ViewController: UIViewController, AVCapturePhotoCaptureDelegate {
+class ViewController: UIViewController, AVCapturePhotoCaptureDelegate, CNContactViewControllerDelegate {
 
     var cameraOutput = AVCapturePhotoOutput()
+    
+    @IBOutlet weak var containerView: UIView!
+    @IBOutlet weak var cameraButton: UIButton!
+    @IBOutlet weak var previewImageView: UIImageView!
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,8 +30,9 @@ class ViewController: UIViewController, AVCapturePhotoCaptureDelegate {
             session.startRunning()
         }
         
-        let singleFingerTap = UITapGestureRecognizer(target: self, action: #selector(takePhoto))
-        view.addGestureRecognizer(singleFingerTap)
+        previewImageView.isHidden = true
+        
+        navigationController!.setNavigationBarHidden(true, animated: false)
     }
     
     func setupSession() -> AVCaptureSession? {
@@ -47,8 +54,8 @@ class ViewController: UIViewController, AVCapturePhotoCaptureDelegate {
         }
         
         if let previewLayer = AVCaptureVideoPreviewLayer(session: session) {
-            view.layer.addSublayer(previewLayer)
-            previewLayer.frame = self.view.layer.frame
+            containerView.layer.addSublayer(previewLayer)
+            previewLayer.frame = containerView.layer.frame
         } else {
             return nil
             
@@ -63,6 +70,12 @@ class ViewController: UIViewController, AVCapturePhotoCaptureDelegate {
         }
         
         return session
+    }
+    
+    @IBAction func cameraButtonPressed(_ sender: Any) {
+        takePhoto()
+        cameraButton.isEnabled = false
+        activityIndicator.startAnimating()
     }
     
     func takePhoto() {
@@ -84,6 +97,10 @@ class ViewController: UIViewController, AVCapturePhotoCaptureDelegate {
         if let sampleBuffer = photoSampleBuffer, let previewBuffer = previewPhotoSampleBuffer, let dataImage = AVCapturePhotoOutput.jpegPhotoDataRepresentation(forJPEGSampleBuffer: sampleBuffer, previewPhotoSampleBuffer: previewBuffer) {
             
             if let image = UIImage(data: dataImage) {
+                
+                previewImageView.image = image
+                previewImageView.isHidden = false
+                
                 if let data = UIImageJPEGRepresentation(image, 1.0) {
                     callAPI(image: data)
                 }
@@ -111,7 +128,15 @@ class ViewController: UIViewController, AVCapturePhotoCaptureDelegate {
                                 if let response = response as? NSDictionary {
                                     if let fta = response["fullTextAnnotation"] as? NSDictionary, let text = fta["text"] as? String {
                                         
-                                        ContactHandler().makeContact(rawText: text)
+                                        let newContact = ContactHandler().makeContact(rawText: text)
+                                        DispatchQueue.main.async {
+                                            self.addContact(contact: newContact) 
+                                            
+                                            self.cameraButton.isEnabled = true
+                                            self.previewImageView.image = nil
+                                            self.previewImageView.isHidden = true
+                                            self.activityIndicator.stopAnimating()
+                                        }
                                     }
                                 }
                             }
@@ -123,5 +148,21 @@ class ViewController: UIViewController, AVCapturePhotoCaptureDelegate {
                 }
             }
         })
+    }
+    
+    func addContact(contact : CNMutableContact) {
+        if #available(iOS 9.0, *) {
+            let store = CNContactStore()
+            let controller = CustomContactViewController(forUnknownContact : contact)
+            controller.contactStore = store
+            controller.delegate = self
+            
+            self.navigationController?.setNavigationBarHidden(false, animated: true)
+            self.navigationController?.pushViewController(controller, animated: true)
+        }
+    }
+    
+    func contactViewLeft() {
+        print("hi")
     }
 }

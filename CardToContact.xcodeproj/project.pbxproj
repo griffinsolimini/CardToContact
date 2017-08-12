@@ -8,19 +8,23 @@
 
 /* Begin PBXBuildFile section */
 		C44FEADB1F3A9E5700FFE225 /* APIHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = C44FEADA1F3A9E5700FFE225 /* APIHandler.swift */; };
+		C4AAB6861F3BCE920023513F /* View.xib in Resources */ = {isa = PBXBuildFile; fileRef = C4AAB6851F3BCE920023513F /* View.xib */; };
+		C4C25DAE1F3D689B00AB0C24 /* CustomContactViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4C25DAD1F3D689B00AB0C24 /* CustomContactViewController.swift */; };
+		C4C25DB01F3D6BB500AB0C24 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C4C25DAF1F3D6BB500AB0C24 /* Assets.xcassets */; };
 		C4F3A0761F3B77890058E708 /* ContactHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4F3A0751F3B77890058E708 /* ContactHandler.swift */; };
 		C4F8F9F31F3A999200921E66 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4F8F9F21F3A999200921E66 /* AppDelegate.swift */; };
-		C4F8F9FA1F3A999200921E66 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C4F8F9F91F3A999200921E66 /* Assets.xcassets */; };
 		C4F8F9FD1F3A999200921E66 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C4F8F9FB1F3A999200921E66 /* LaunchScreen.storyboard */; };
 		C4F8FA051F3A99FC00921E66 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4F8FA041F3A99FC00921E66 /* ViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		C44FEADA1F3A9E5700FFE225 /* APIHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIHandler.swift; sourceTree = "<group>"; };
+		C4AAB6851F3BCE920023513F /* View.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = View.xib; sourceTree = "<group>"; };
+		C4C25DAD1F3D689B00AB0C24 /* CustomContactViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomContactViewController.swift; sourceTree = "<group>"; };
+		C4C25DAF1F3D6BB500AB0C24 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C4F3A0751F3B77890058E708 /* ContactHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactHandler.swift; sourceTree = "<group>"; };
 		C4F8F9EF1F3A999200921E66 /* CardToContact.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CardToContact.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C4F8F9F21F3A999200921E66 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		C4F8F9F91F3A999200921E66 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C4F8F9FC1F3A999200921E66 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		C4F8F9FE1F3A999200921E66 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C4F8FA041F3A99FC00921E66 /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -57,11 +61,13 @@
 			isa = PBXGroup;
 			children = (
 				C4F8F9F21F3A999200921E66 /* AppDelegate.swift */,
+				C4C25DAD1F3D689B00AB0C24 /* CustomContactViewController.swift */,
 				C4F8FA041F3A99FC00921E66 /* ViewController.swift */,
+				C4AAB6851F3BCE920023513F /* View.xib */,
 				C44FEADA1F3A9E5700FFE225 /* APIHandler.swift */,
 				C4F3A0751F3B77890058E708 /* ContactHandler.swift */,
-				C4F8F9F91F3A999200921E66 /* Assets.xcassets */,
 				C4F8F9FB1F3A999200921E66 /* LaunchScreen.storyboard */,
+				C4C25DAF1F3D6BB500AB0C24 /* Assets.xcassets */,
 				C4F8F9FE1F3A999200921E66 /* Info.plist */,
 			);
 			path = CardToContact;
@@ -128,7 +134,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				C4F8F9FD1F3A999200921E66 /* LaunchScreen.storyboard in Resources */,
-				C4F8F9FA1F3A999200921E66 /* Assets.xcassets in Resources */,
+				C4C25DB01F3D6BB500AB0C24 /* Assets.xcassets in Resources */,
+				C4AAB6861F3BCE920023513F /* View.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -142,6 +149,7 @@
 				C44FEADB1F3A9E5700FFE225 /* APIHandler.swift in Sources */,
 				C4F3A0761F3B77890058E708 /* ContactHandler.swift in Sources */,
 				C4F8FA051F3A99FC00921E66 /* ViewController.swift in Sources */,
+				C4C25DAE1F3D689B00AB0C24 /* CustomContactViewController.swift in Sources */,
 				C4F8F9F31F3A999200921E66 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
